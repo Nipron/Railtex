@@ -15,6 +15,11 @@ form {
   margin-bottom: 10px;
   border: solid 1px $wizard-brown;
   padding: 2px;
+  caret-color: $wizard-brown;
+}
+
+.field::placeholder {
+  color: $wizard-brown;
 }
 
 button {
@@ -24,4 +29,10 @@ button {
   border: none;
   text-decoration: none;
   padding: 3px;
+}
+
+.formError {
+  border: red 1px solid;
+  padding: 5px;
+  color: red;
 }

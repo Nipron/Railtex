@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form';
+import {required, minLengthCreator, email, passwordsMustMatch} from "../utils/validators";
 import './steps.scss';
 
 import {updateData} from "../../redux/reducers";
+import {Input} from "../utils/FormControls";
+
+const val1 = [required, email];
+const val2 = [required, minLengthCreator(8), passwordsMustMatch];
 
 const Form1 = (props) => {
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -13,14 +19,17 @@ const Form1 = (props) => {
                 <Field className="field"
                        placeholder={props.email ? props.email : "E-mail"}
                        name={"email"}
-                       component={"input"}/>
+                       validate={val1}
+                       component={Input}/>
             </div>
             <div>
                 <div className="label">Password</div>
                 <Field className="field"
                        placeholder={props.password ? props.password : "Password"}
+                       type="password"
                        name={"password"}
-                       component={"input"}/>
+                       validate={val2}
+                       component={Input}/>
             </div>
             <div>
                 <div className="label">Password confirm</div>
@@ -28,8 +37,10 @@ const Form1 = (props) => {
                        placeholder={props.confirmPassword
                            ? props.confirmPassword
                            : "Confirm password"}
+                       type="password"
                        name={"confirmPassword"}
-                       component={"input"}/>
+                       validate={val2}
+                       component={Input}/>
             </div>
             {/*  <div>
                 <Field name="favoriteColor" component="select">
@@ -50,7 +61,7 @@ const Form1Redux = reduxForm({form: 'step1'})(Form1);
 
 const Step1 = (props) => {
     const onSubmit = (formData) => {
-        props.update(formData);
+
     }
     return <Form1Redux onSubmit={onSubmit} {...props}/>
 }
