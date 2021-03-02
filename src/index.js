@@ -4,11 +4,13 @@ import {BrowserRouter} from "react-router-dom";
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 
-import './index.css';
+import './index.scss';
 import App from './App';
 import reducers from "./redux/reducers";
 
 const store = createStore(reducers);
+
+window.store = store;
 
 ReactDOM.render(
     <Provider store={store}>

@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   height: 100vh;
 
   background-color: #ff7700;
@@ -12,7 +11,6 @@
   width: 80vw;
   height: 80vh;
   background: white;
-
   position: absolute;
   top: 50%;
   left: 50%;

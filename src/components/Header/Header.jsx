@@ -7,16 +7,13 @@ const Header = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [styles, setStyles] = useState([, "current", "unvisited", "unvisited", "unvisited"]);
 
-    const handleClick = (currentPage) => {
-        setCurrentPage(currentPage);
-    };
+    const handleClick = currentPage => setCurrentPage(currentPage);
 
     useEffect(() => {
         if (currentPage === 1) setStyles([, "current", "unvisited", "unvisited", "unvisited"]);
         if (currentPage === 2) setStyles([, "visited", "current", "unvisited", "unvisited"]);
         if (currentPage === 3) setStyles([, "visited", "visited", "current", "unvisited"]);
         if (currentPage === 4) setStyles([, "visited", "visited", "visited", "current"]);
-        console.log(styles);
     }, [currentPage]);
 
     return (
