@@ -1,13 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import './header.scss';
 import {Link} from 'react-router-dom';
+import {connect, useSelector} from 'react-redux';
+import {setCurrentPage} from "../../redux/reducers";
+import {useHistory} from "react-router";
 
-const Header = () => {
+const Header = (props) => {
 
-    const [currentPage, setCurrentPage] = useState(1);
+    let currentPage = useSelector(state => state.data.currentPage);
+
     const [styles, setStyles] = useState([, "current", "unvisited", "unvisited", "unvisited"]);
 
-    const handleClick = currentPage => setCurrentPage(currentPage);
+    const handleClick = currentPage => {
+        props.setCurrentPage(currentPage);
+    }
+    /*const history = useHistory();
+
+    useEffect(() => {
+        return history.listen((location) => {
+            console.log(currentPage + "ggg")
+            console.log(`You changed the page to: ${location.pathname}`)
+        })
+    }, [history])*/
 
     useEffect(() => {
         if (currentPage === 1) setStyles([, "current", "unvisited", "unvisited", "unvisited"]);
@@ -44,4 +58,5 @@ const Header = () => {
     );
 };
 
-export default Header;
+
+export default connect(null, {setCurrentPage})(Header);

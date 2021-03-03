@@ -1,55 +1,47 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form';
 import {required, minLengthCreator, email, passwordsMustMatch} from "../utils/validators";
 import './steps.scss';
 
-import {updateData} from "../../redux/reducers";
+import {update, load, setCurrentPage} from "../../redux/reducers";
 import {Input} from "../utils/FormControls";
+import {useHistory} from "react-router-dom";
 
-const val1 = [required, email];
-const val2 = [required, minLengthCreator(8), passwordsMustMatch];
+const emailValidations = [required, email];
+const passwordValidations = [required, minLengthCreator(1), passwordsMustMatch];
 
 const Form1 = (props) => {
 
     return (
         <form onSubmit={props.handleSubmit}>
+
             <div>
                 <div className="label">Email</div>
                 <Field className="field"
-                       placeholder={props.email ? props.email : "E-mail"}
+                       placeholder="E-mail"
                        name={"email"}
-                       validate={val1}
+                       validate={emailValidations}
                        component={Input}/>
             </div>
             <div>
                 <div className="label">Password</div>
                 <Field className="field"
-                       placeholder={props.password ? props.password : "Password"}
+                       placeholder="Password"
                        type="password"
                        name={"password"}
-                       validate={val2}
+                       validate={passwordValidations}
                        component={Input}/>
             </div>
             <div>
                 <div className="label">Password confirm</div>
                 <Field className="field"
-                       placeholder={props.confirmPassword
-                           ? props.confirmPassword
-                           : "Confirm password"}
+                       placeholder="Confirm password"
                        type="password"
                        name={"confirmPassword"}
-                       validate={val2}
+                       validate={passwordValidations}
                        component={Input}/>
             </div>
-            {/*  <div>
-                <Field name="favoriteColor" component="select">
-                    <option/>
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                </Field>
-            </div>*/}
             <button>
                 NEXT
             </button>
@@ -57,11 +49,22 @@ const Form1 = (props) => {
     )
 }
 
-const Form1Redux = reduxForm({form: 'step1'})(Form1);
+let Form1Redux = reduxForm({form: 'step1'})(Form1);
+
+Form1Redux = connect(state => ({
+        initialValues: state.data
+    }),
+    {load}
+)(Form1Redux)
 
 const Step1 = (props) => {
-    const onSubmit = (formData) => {
 
+    const history = useHistory();
+
+    const onSubmit = (formData) => {
+        props.update(formData);
+        props.setCurrentPage(2);
+        history.push('/step2');
     }
     return <Form1Redux onSubmit={onSubmit} {...props}/>
 }
@@ -72,8 +75,4 @@ const mapStateToProps = state => ({
     confirmPassword: state.data.confirmPassword
 })
 
-const mapDispatchToProps = {
-    update: updateData
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Step1);
+export default connect(mapStateToProps, {update, setCurrentPage})(Step1);

@@ -6,7 +6,6 @@ form {
 }
 
 .label {
-  text-transform: uppercase;
   margin: 10px auto;
 }
 
@@ -28,6 +27,7 @@ button {
   background-color: $wizard-brown;
   border: none;
   text-decoration: none;
+  margin-top: 10px;
   padding: 3px;
 }
 
@@ -35,4 +35,28 @@ button {
   border: red 1px solid;
   padding: 5px;
   color: red;
+}
+
+.option {
+  width: 180px;
+  margin-bottom: 10px;
+  border: solid 1px $wizard-brown;
+  padding: 2px;
+  caret-color: $wizard-brown;
+}
+
+.success {
+  text-align: center;
+}
+
+.success h3 {
+  color: black;
+}
+
+.success span {
+  color: black;
+}
+
+.success span a{
+  color: black;
 }
