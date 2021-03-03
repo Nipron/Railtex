@@ -1,14 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {Field, reduxForm} from 'redux-form';
-import {required} from "../utils/validators";
 import './steps.scss';
 
 import {update, load, setCurrentPage} from "../../redux/reducers";
-import {Input} from "../utils/FormControls";
 import {useHistory} from "react-router-dom";
-
-const fieldValidations = [required];
 
 const Form3 = (props) => {
 
@@ -18,7 +14,6 @@ const Form3 = (props) => {
             <div>
                 <div className="label">Category 1</div>
                 <Field className="option" name="cat1" component="select">
-                    <option/>
                     <option value="#ff0000">Red</option>
                     <option value="#00ff00">Green</option>
                     <option value="#0000ff">Blue</option>
@@ -27,7 +22,6 @@ const Form3 = (props) => {
             <div>
                 <div className="label">Category 2</div>
                 <Field className="option" name="cat2" component="select">
-                    <option/>
                     <option value="#ff0000">Red</option>
                     <option value="#00ff00">Green</option>
                     <option value="#0000ff">Blue</option>
@@ -36,7 +30,6 @@ const Form3 = (props) => {
             <div>
                 <div className="label">Category 3</div>
                 <Field className="option" name="cat3" component="select">
-                    <option/>
                     <option value="#ff0000">Red</option>
                     <option value="#00ff00">Green</option>
                     <option value="#0000ff">Blue</option>
@@ -69,10 +62,5 @@ const Step3 = (props) => {
     return <Form2Redux onSubmit={onSubmit} {...props}/>
 }
 
-const mapStateToProps = state => ({
-    email: state.data.email,
-    password: state.data.password,
-    confirmPassword: state.data.confirmPassword
-})
 
-export default connect(mapStateToProps, {update, setCurrentPage})(Step3);
+export default connect(null, {update, setCurrentPage})(Step3);

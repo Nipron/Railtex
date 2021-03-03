@@ -39,14 +39,6 @@ const Form2 = (props) => {
                        validate={fieldValidations}
                        component={Input}/>
             </div>
-            {/*  <div>
-                <Field name="favoriteColor" component="select">
-                    <option/>
-                    <option value="#ff0000">Red</option>
-                    <option value="#00ff00">Green</option>
-                    <option value="#0000ff">Blue</option>
-                </Field>
-            </div>*/}
             <button>
                 NEXT
             </button>
@@ -74,10 +66,5 @@ const Step2 = (props) => {
     return <Form2Redux onSubmit={onSubmit} {...props}/>
 }
 
-const mapStateToProps = state => ({
-    email: state.data.email,
-    password: state.data.password,
-    confirmPassword: state.data.confirmPassword
-})
 
-export default connect(mapStateToProps, {update, setCurrentPage})(Step2);
+export default connect(null, {update, setCurrentPage})(Step2);

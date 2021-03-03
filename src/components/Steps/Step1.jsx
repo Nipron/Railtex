@@ -69,10 +69,5 @@ const Step1 = (props) => {
     return <Form1Redux onSubmit={onSubmit} {...props}/>
 }
 
-const mapStateToProps = state => ({
-    email: state.data.email,
-    password: state.data.password,
-    confirmPassword: state.data.confirmPassword
-})
 
-export default connect(mapStateToProps, {update, setCurrentPage})(Step1);
+export default connect(null , {update, setCurrentPage})(Step1);
